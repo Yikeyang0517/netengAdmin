@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.netneg.admin.dao.BPEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.netneg.admin.dto.BPListOutDto" >
+  	<id column="bpid" property="bpid" jdbcType="VARCHAR" />
+    <result column="bp_code" property="bpCode" jdbcType="VARCHAR" />
+    <result column="bp_name" property="bpName" jdbcType="VARCHAR" />
+    <result column="bp_short" property="bpShort" jdbcType="VARCHAR" />
+    <result column="empcnt" property="empcnt" jdbcType="BIGINT" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="bpimpt" property="bpimpt" jdbcType="BIGINT" />
+    <result column="sales" property="sales" jdbcType="VARCHAR" />
+    <result column="hpurl" property="hpurl" jdbcType="VARCHAR" />
+    <result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="fax" property="fax" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createuser" property="createuser" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+    <result column="bp_memo" property="bpMemo" jdbcType="VARCHAR" />
+    <result column="contactdate" property="contactdate" jdbcType="TIMESTAMP" />
+    <result column="contactcnt" property="contactcnt" jdbcType="BIGINT" />
+    <result column="maxcnttdays" property="maxcnttdays" jdbcType="BIGINT" />
+    <result column="prjprsncnt" property="prjprsncnt" jdbcType="BIGINT" />
+    <result column="gotprjcnt" property="gotprjcnt" jdbcType="BIGINT" />
+    <result column="bpprsncnt" property="bpprsncnt" jdbcType="BIGINT" />
+    <result column="prjflg" property="prjflg" jdbcType="VARCHAR" />
+    <result column="wngtext" property="wngtext" jdbcType="VARCHAR" />
+    <result column="wnglvl" property="wnglvl" jdbcType="VARCHAR" />
+    <result column="cnttwnglvl" property="cnttwnglvl" jdbcType="VARCHAR" /> 
+  </resultMap>
+  
+  <resultMap id="MasterResultMap" type="com.netneg.admin.dto.MasterListOutDto" >
+  	<result column="id" property="key" jdbcType="VARCHAR" />
+  	<result column="name" property="value" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    bpid,bp_code, bp_name, bp_short, empcnt, country, bpimpt, sales, hpurl, zipcode, address, tel, fax, createtime, createuser, updateuser, updatetime, bp_memo, contactdate, contactcnt, maxcnttdays, prjprsncnt, gotprjcnt, bpprsncnt, prjflg, wngtext, wnglvl, cnttwnglvl
+  </sql>
+  
+  <select id="getInitList" resultMap="BaseResultMap">
+  	select 
+  	a.bpid,a.bp_code, a.bp_name, a.bp_short, a.empcnt, a.country, a.bpimpt, b.DISPLAY_NAME as sales, a.hpurl, a.zipcode, a.address, a.tel, a.fax, a.createtime, a.createuser, a.updateuser, a.updatetime, a.bp_memo, a.contactdate, a.contactcnt, a.maxcnttdays, a.prjprsncnt, a.gotprjcnt, a.bpprsncnt, a.prjflg, a.wngtext, a.wnglvl, a.cnttwnglvl
+  	from neg_bp a 
+  	left join WB_USER b
+  	on a.sales = b.USER_NAME
+  	where a.delflg=0
+  	ORDER BY  a.contactdate DESC
+  </select>
+  
+  <select id="getSearchList" resultMap="BaseResultMap">
+  	select 
+  	a.bpid,a.bp_code, a.bp_name, a.bp_short, a.empcnt, a.country, a.bpimpt, b.DISPLAY_NAME as sales, a.hpurl, a.zipcode, a.address, a.tel, a.fax, a.createtime, a.createuser, a.updateuser, a.updatetime, a.bp_memo, a.contactdate, a.contactcnt, a.maxcnttdays, a.prjprsncnt, a.gotprjcnt, a.bpprsncnt, a.prjflg, a.wngtext, a.wnglvl, a.cnttwnglvl
+  	from neg_bp a 
+  	left join WB_USER b
+  	on a.sales = b.USER_NAME
+  	where a.delflg=0
+  	<if test="company != null and company !=''">
+			and a.bpid = #{company}
+	</if>
+	<if test="sales != null and sales !=''">
+			and a.sales = #{sales}
+	</if>
+  	ORDER BY  a.contactdate DESC
+  </select>
+  
+  <select id="getSalesMaster" resultMap="MasterResultMap">
+  	select USER_NAME as id, DISPLAY_NAME as name from WB_USER
+  </select>
+  <update id="ItemUpdate" parameterType = "com.netneg.admin.dto.BPListInDto">
+  update neg_bp set
+  bp_code = #{bpCode},
+  bp_name = #{bpName},
+  bp_short = #{bpShort},
+  empcnt = #{empcnt},
+  country = #{country},
+  bpimpt = #{bpimpt},
+  sales = #{sales},
+  hpurl = #{hpurl},
+  zipcode = #{zipcode},
+  address = #{address},
+  tel = #{tel},
+  fax = #{fax},
+  bp_memo = #{bpMemo},
+  maxcnttdays = #{maxcnttdays},
+  wngtext = #{wngtext},
+  wnglvl = #{wnglvl},
+  updatetime = #{updatetime},
+  updateuser = #{updateuser}
+  where bpid = #{bpid}
+  </update>
+  <update id="deleteById" parameterType = "String">
+  update neg_bp set
+  delflg = '1'
+  where bpid = #{bpid}
+  </update>
+  <insert id="createData" parameterType = "com.netneg.admin.dto.BPListInDto" >
+  insert into neg_bp(bpid,bp_code,delflg,bp_name,bp_short,empcnt,country,bpimpt,sales,hpurl,zipcode,address,tel,fax,bp_memo,maxcnttdays,wngtext,wnglvl,createtime,createuser) 
+  values(#{bpid},#{bpCode},0,#{bpName},#{bpShort},#{empcnt},#{country},#{bpimpt},#{sales},#{hpurl},#{zipcode},#{address},#{tel},#{fax},#{bpMemo},#{maxcnttdays},#{wngtext},#{wnglvl},#{createtime},#{createuser})
+  </insert>
+</mapper>
