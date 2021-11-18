@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.netneg.admin.dao.BPEntityMapper;
 import com.netneg.admin.dto.BPListInDto;
 import com.netneg.admin.dto.BPListOutDto;
+import com.netneg.admin.dto.CustcnntOutDto;
 import com.netneg.admin.dto.MasterListOutDto;
 import com.netneg.admin.service.BPListService;
 import com.netneg.admin.vo.ResultJson;
+import com.netneg.admin.vo.SearchBean;
 
 @RestController
 @RequestMapping("/BPList")
@@ -40,6 +42,20 @@ public class BPController {
 		}
 	}
 	
+	@GetMapping("getcntList")
+	public ResultJson getcntList() {
+		try {
+			List<CustcnntOutDto> list=bpListService.getcntList();
+			ResultJson ret=ResultJson.success(list,list.size());
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
+	
 	@GetMapping("getSalesList")
 	public ResultJson getSalesList() {
 		try {
@@ -53,12 +69,81 @@ public class BPController {
 			return ret;
 		}
 	}
+	
+	@GetMapping("getPrjList")
+	public ResultJson getPrjList() {
+		try {
+			List<MasterListOutDto> mapList= bpDto.getPrjMaster();
+			ResultJson ret=ResultJson.success(mapList,mapList.size());
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
+	
+	@GetMapping("getCustpsnList")
+	public ResultJson getCustpsnList() {
+		try {
+			List<MasterListOutDto> mapList= bpDto.getCustpsnMaster();
+			ResultJson ret=ResultJson.success(mapList,mapList.size());
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
+	
+	@GetMapping("getPersonList")
+	public ResultJson getPersonList() {
+		try {
+			List<MasterListOutDto> mapList= bpDto.getPersonMaster();
+			ResultJson ret=ResultJson.success(mapList,mapList.size());
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
+	
 	@GetMapping("getSearch")
 	public ResultJson getSearch(String company,String sales) {
 		
 		try {
-			List<BPListOutDto> list=bpListService.SearchBP(company,sales);
-			ResultJson ret=ResultJson.success(list,list.size());
+			List<BPListOutDto> list=bpListService.searchBP(company,sales);
+			ResultJson ret;
+			if(list != null) {
+				ret=ResultJson.success(list,list.size());
+			}else {
+				ret=ResultJson.success(null,null);
+			}
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
+	
+	
+	@GetMapping("getContactSearch")
+	public ResultJson getContactSearch(SearchBean data) {
+		
+		try {
+			List<CustcnntOutDto> list=bpListService.contactSearch(data);
+			ResultJson ret;
+			if(list != null) {
+				ret=ResultJson.success(list,list.size());
+			}else {
+				ret=ResultJson.success(null,null);
+			}
 			return ret;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -73,6 +158,22 @@ public class BPController {
 		
 		try {
 			bpDto.deleteById(company);
+			ResultJson ret=ResultJson.success(null,null);
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
+	
+	
+	@GetMapping("deleteContactById")
+	public ResultJson deleteContactById(String id) {
+		
+		try {
+			bpDto.deleteContactById(id);
 			ResultJson ret=ResultJson.success(null,null);
 			return ret;
 		} catch (Exception e) {
