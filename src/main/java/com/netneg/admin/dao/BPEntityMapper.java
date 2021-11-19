@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.netneg.admin.dto.BPListInDto;
 import com.netneg.admin.dto.BPListOutDto;
+import com.netneg.admin.dto.CustcnntInDto;
 import com.netneg.admin.dto.CustcnntOutDto;
 import com.netneg.admin.dto.MasterListOutDto;
 import com.netneg.admin.vo.SearchBean;
@@ -15,7 +16,7 @@ public interface BPEntityMapper {
 
 	List<BPListOutDto> getSearchList(String company, String sales);
 
-	void ItemUpdate(BPListInDto data);
+	void AllItemUpdate(BPListInDto data);
 
 	void deleteById(String id);
 
@@ -36,4 +37,14 @@ public interface BPEntityMapper {
 	List<CustcnntOutDto> contactSearch(SearchBean data);
 
 	void deleteContactById(String id);
+
+	void CntAllItemUpdate(CustcnntInDto data);
+
+	String getCustpsnIdById(String custcnttId);
+
+	void updateCPById(String custpsnId);
+
+	void updateBPById(String custpsnId);
+
+	void createContact(CustcnntInDto data);
 }

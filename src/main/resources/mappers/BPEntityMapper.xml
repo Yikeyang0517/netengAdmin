@@ -10,6 +10,7 @@
     <result column="country" property="country" jdbcType="VARCHAR" />
     <result column="bpimpt" property="bpimpt" jdbcType="BIGINT" />
     <result column="sales" property="sales" jdbcType="VARCHAR" />
+    <result column="salesName" property="salesName" jdbcType="VARCHAR" />
     <result column="hpurl" property="hpurl" jdbcType="VARCHAR" />
     <result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
@@ -36,12 +37,16 @@
     <id column="custcntt_id" property="custcnttId" jdbcType="VARCHAR" />
     <result column="cnntlist_id" property="cnntlistId" jdbcType="VARCHAR" />
     <result column="prjprepsn_id" property="prjprepsnId" jdbcType="VARCHAR" />
+    <result column="prj_id" property="prjId" jdbcType="VARCHAR" />
     <result column="prj_name" property="prjName" jdbcType="VARCHAR" />
+    <result column="custpsn_id" property="custpsnId" jdbcType="VARCHAR" />
     <result column="custpsn_name" property="custpsnName" jdbcType="VARCHAR" />
     <result column="bp_name" property="bpName" jdbcType="VARCHAR" />
     <result column="sales" property="sales" jdbcType="VARCHAR" />
+    <result column="salesName" property="salesName" jdbcType="VARCHAR" />
     <result column="contactdate" property="contactdate" jdbcType="TIMESTAMP" />
     <result column="cntt_type" property="cnttType" jdbcType="VARCHAR" />
+    <result column="psn_id" property="psnId" jdbcType="VARCHAR" />
     <result column="psn_name" property="psnName" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
     <result column="result" property="result" jdbcType="VARCHAR" />
@@ -67,17 +72,17 @@
   
   <select id="getInitList" resultMap="BaseResultMap">
   	select 
-  	a.bpid,a.bp_code, a.bp_name, a.bp_short, a.empcnt, a.country, a.bpimpt, b.DISPLAY_NAME as sales, a.hpurl, a.zipcode, a.address, a.tel, a.fax, a.createtime, a.createuser, a.updateuser, a.updatetime, a.bp_memo, a.contactdate, a.contactcnt, a.maxcnttdays, a.prjprsncnt, a.gotprjcnt, a.bpprsncnt, a.prjflg, a.wngtext, a.wnglvl, a.cnttwnglvl
+  	a.bpid,a.bp_code, a.bp_name, a.bp_short, a.empcnt, a.country, a.bpimpt, a.sales, b.DISPLAY_NAME as salesName, a.hpurl, a.zipcode, a.address, a.tel, a.fax, a.createtime, a.createuser, a.updateuser, a.updatetime, a.bp_memo, a.contactdate, a.contactcnt, a.maxcnttdays, a.prjprsncnt, a.gotprjcnt, a.bpprsncnt, a.prjflg, a.wngtext, a.wnglvl, a.cnttwnglvl
   	from neg_bp a 
   	left join WB_USER b
   	on a.sales = b.USER_NAME
   	where a.delflg=0
-  	ORDER BY  a.contactdate DESC
+  	ORDER BY  a.updatetime,a.createtime DESC
   </select>
   
   <select id="getcntList" resultMap="ContactResultMap">
   	select 
-  	a.custcntt_id,a.cnntlist_id,a.prjprepsn_id,c.prj_name,d.custpsn_name,e.bp_name,b.DISPLAY_NAME as sales,a.contactdate,a.cntt_type,f.psn_name,a.price,a.result,a.resumelvl,a.workhours,a.address,a.cnntime,a.psncnttmemo,a.createtime,a.createuser,a.updatetime,a.updateuser 
+  	a.custcntt_id,a.cnntlist_id,a.prjprepsn_id,a.prj_id,c.prj_name,d.custpsn_id,d.custpsn_name,e.bp_name,a.sales,b.DISPLAY_NAME as salesName,a.contactdate,a.cntt_type,a.psn_id,f.psn_name,a.price,a.result,a.resumelvl,a.workhours,a.address,a.cnntime,a.psncnttmemo,a.createtime,a.createuser,a.updatetime,a.updateuser 
   	from neg_custcntt a 
   	left join WB_USER b
   	on a.sales = b.USER_NAME
@@ -90,12 +95,12 @@
   	left join neg_bp e
   	on d.bpid = e.bpid
   	where a.delflg=0
-  	ORDER BY  a.contactdate DESC
+  	ORDER BY  a.updatetime,a.createtime DESC
   </select>
    
   <select id="contactSearch" resultMap="ContactResultMap">
   	select 
-  	a.custcntt_id,a.cnntlist_id,a.prjprepsn_id,c.prj_name,d.custpsn_name,e.bp_name,b.DISPLAY_NAME as sales,a.contactdate,a.cntt_type,f.psn_name,a.price,a.result,a.resumelvl,a.workhours,a.address,a.cnntime,a.psncnttmemo,a.createtime,a.createuser,a.updatetime,a.updateuser 
+  	a.custcntt_id,a.cnntlist_id,a.prjprepsn_id,a.prj_id,c.prj_name,d.custpsn_id,d.custpsn_name,e.bp_name,a.sales,b.DISPLAY_NAME as salesName,a.contactdate,a.cntt_type,a.psn_id,f.psn_name,a.price,a.result,a.resumelvl,a.workhours,a.address,a.cnntime,a.psncnttmemo,a.createtime,a.createuser,a.updatetime,a.updateuser 
   	from neg_custcntt a 
   	left join WB_USER b
   	on a.sales = b.USER_NAME
@@ -132,13 +137,13 @@
 	<if test="enddate != null and enddate !=''">
 			and DATE_FORMAT(a.contactdate,'%Y%m%d') &lt; #{enddate}
 	</if>
-  	ORDER BY  a.contactdate DESC
+  	ORDER BY  a.updatetime,a.createtime DESC
   	
   </select>
   
   <select id="getSearchList" resultMap="BaseResultMap">
   	select 
-  	a.bpid,a.bp_code, a.bp_name, a.bp_short, a.empcnt, a.country, a.bpimpt, b.DISPLAY_NAME as sales, a.hpurl, a.zipcode, a.address, a.tel, a.fax, a.createtime, a.createuser, a.updateuser, a.updatetime, a.bp_memo, a.contactdate, a.contactcnt, a.maxcnttdays, a.prjprsncnt, a.gotprjcnt, a.bpprsncnt, a.prjflg, a.wngtext, a.wnglvl, a.cnttwnglvl
+  	a.bpid,a.bp_code, a.bp_name, a.bp_short, a.empcnt, a.country, a.bpimpt, a.sales, b.DISPLAY_NAME as salesName, a.hpurl, a.zipcode, a.address, a.tel, a.fax, a.createtime, a.createuser, a.updateuser, a.updatetime, a.bp_memo, a.contactdate, a.contactcnt, a.maxcnttdays, a.prjprsncnt, a.gotprjcnt, a.bpprsncnt, a.prjflg, a.wngtext, a.wnglvl, a.cnttwnglvl
   	from neg_bp a 
   	left join WB_USER b
   	on a.sales = b.USER_NAME
@@ -149,7 +154,7 @@
 	<if test="sales != null and sales !=''">
 			and a.sales = #{sales}
 	</if>
-  	ORDER BY  a.contactdate DESC
+  	ORDER BY  a.updatetime,a.createtime DESC
   </select>
   
   
@@ -177,7 +182,12 @@
   	select count(*) from neg_custcntt where custcntt_id = #{autoId}
   </select>
   
-  <update id="ItemUpdate" parameterType = "com.netneg.admin.dto.BPListInDto">
+  
+  <select id="getCustpsnIdById" resultType="String">
+  	select custpsn_id from neg_custcntt where custcntt_id = #{custcnttId}
+  </select>
+  
+  <update id="AllItemUpdate" parameterType = "com.netneg.admin.dto.BPListInDto">
   update neg_bp set
   bp_code = #{bpCode},
   bp_name = #{bpName},
@@ -199,6 +209,26 @@
   updateuser = #{updateuser}
   where bpid = #{bpid}
   </update>
+  
+  <update id="CntAllItemUpdate" parameterType = "com.netneg.admin.dto.CustcnntInDto">
+  update neg_custcntt set
+  prj_id = #{prjId},
+  custpsn_id = #{custpsnId},
+  psn_id = #{psnId},
+  sales = #{sales},
+  psncnttmemo = #{psncnttmemo},
+  cntt_type = #{cnttType},
+  price = #{price},
+  contactdate = #{contactdate},
+  workhours = #{workhours},
+  address = #{address},
+  cnntime = #{cnntime},
+  result = #{result},
+  resumelvl = #{resumelvl},
+  updateuser = #{updateuser},
+  updatetime = #{updatetime}
+  where custcntt_id = #{custcnttId}
+  </update>
   <update id="deleteById" parameterType = "String">
   update neg_bp set
   delflg = '1'
@@ -210,8 +240,26 @@
   where custcntt_id = #{id}
   </update>
   
+  <update id="updateCPById" parameterType = "String">
+  update neg_custpsn set
+  contactdate = (SELECT MAX(DATE(contactdate))FROM neg_custcntt where custpsn_id = #{custpsnId}),
+  contactcnt = (SELECT count(*) FROM neg_custcntt where custpsn_id = #{custpsnId})
+  where custpsn_id = #{custpsnId}
+  </update>
+  
+  <update id="updateBPById" parameterType = "String">
+  update neg_bp set
+  contactdate = (SELECT MAX(DATE(contactdate))FROM neg_custpsn where custpsn_id = #{custpsnId}),
+  contactcnt = (SELECT sum(contactcnt) FROM neg_custpsn where bpid = (SELECT bpid from neg_custpsn where custpsn_id = #{custpsnId}))
+  where bpid = (SELECT bpid from neg_custpsn where custpsn_id = #{custpsnId})
+  </update>
   <insert id="createData" parameterType = "com.netneg.admin.dto.BPListInDto" >
-  insert into neg_bp(bpid,bp_code,delflg,bp_name,bp_short,empcnt,country,bpimpt,sales,hpurl,zipcode,address,tel,fax,bp_memo,contactdate,contactcnt,maxcnttdays,wngtext,wnglvl,createtime,createuser) 
-  values(#{bpid},#{bpCode},0,#{bpName},#{bpShort},#{empcnt},#{country},#{bpimpt},#{sales},#{hpurl},#{zipcode},#{address},#{tel},#{fax},#{bpMemo},#{createtime},1,#{maxcnttdays},#{wngtext},#{wnglvl},#{createtime},#{createuser})
+  insert into neg_bp(bpid,bp_code,delflg,bp_name,bp_short,empcnt,country,bpimpt,sales,hpurl,zipcode,address,tel,fax,bp_memo,maxcnttdays,wngtext,wnglvl,createtime,createuser) 
+  values(#{bpid},#{bpCode},0,#{bpName},#{bpShort},#{empcnt},#{country},#{bpimpt},#{sales},#{hpurl},#{zipcode},#{address},#{tel},#{fax},#{bpMemo},#{maxcnttdays},#{wngtext},#{wnglvl},#{createtime},#{createuser})
+  </insert>
+  
+  <insert id="createContact" parameterType = "com.netneg.admin.dto.CustcnntInDto" >
+  insert into neg_custcntt(custcntt_id,prj_id,delflg,custpsn_id,psn_id,sales,psncnttmemo,cntt_type,price,contactdate,workhours,address,cnntime,result,resumelvl,createtime,createuser) 
+  values(#{custcnttId},#{prjId},0,#{custpsnId},#{psnId},#{sales},#{psncnttmemo},#{cnttType},#{price},#{contactdate},#{workhours},#{address},#{cnntime},#{result},#{resumelvl},#{createtime},#{createuser})
   </insert>
 </mapper>

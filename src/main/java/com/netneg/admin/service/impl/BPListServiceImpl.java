@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.netneg.admin.dao.BPEntityMapper;
 import com.netneg.admin.dto.BPListInDto;
 import com.netneg.admin.dto.BPListOutDto;
+import com.netneg.admin.dto.CustcnntInDto;
 import com.netneg.admin.dto.CustcnntOutDto;
 import com.netneg.admin.service.BPListService;
 import com.netneg.admin.vo.SearchBean;
@@ -47,12 +48,12 @@ public class BPListServiceImpl implements BPListService{
 					Date oldDate = list.get(i).getContactdate();
 					if(oldDate != null ) {
 					long diffday = (date.getTime() - oldDate.getTime()) / 60 / 60 / 24 / 1000;
-					if(diffday > list.get(i).getMaxcnttdays()) {
+					if(list.get(i).getMaxcnttdays() != null && diffday > list.get(i).getMaxcnttdays()) {
 						list.get(i).setContactflg("1");
-					}
 					}else {
 						list.get(i).setContactflg("1");
 					}
+					} 
 				}
 				return list;
 	}
@@ -116,6 +117,35 @@ public class BPListServiceImpl implements BPListService{
 			list.get(i).setId(String.valueOf(i+1));
 		}
 		return list;
+	}
+	@Override
+	public void CntAllItemUpdate(CustcnntInDto data) {
+		//获取更新前custpsnId
+		String oldCustpsnId = bpDto.getCustpsnIdById(data.getCustcnttId());
+		//更新沟通记录表
+		bpDto.CntAllItemUpdate(data);
+		//获取更新后的custpsnId
+		String newCustpsnId = data.getCustpsnId();
+		//通过custpsnId更新custpsn表
+		bpDto.updateCPById(oldCustpsnId);
+		bpDto.updateCPById(newCustpsnId);
+		//通过custpsnId更新bp表
+		bpDto.updateBPById(oldCustpsnId);
+		bpDto.updateBPById(newCustpsnId);
+	}
+	@Override
+	public void createContact(CustcnntInDto data) {
+		//生成唯一pbid
+		data.setCustcnttId(getCode(2));
+		//插入一条BP数据
+		bpDto.createContact(data);
+		//获取当前沟通客户的Id
+		String custpsnId = data.getCustpsnId();
+		//通过custpsnId更新custpsn表
+		bpDto.updateCPById(custpsnId);
+		//通过custpsnId更新bp表
+		bpDto.updateBPById(custpsnId);
+		
 	}
 	
 }

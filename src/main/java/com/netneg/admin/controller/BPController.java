@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.netneg.admin.dao.BPEntityMapper;
 import com.netneg.admin.dto.BPListInDto;
 import com.netneg.admin.dto.BPListOutDto;
+import com.netneg.admin.dto.CustcnntInDto;
 import com.netneg.admin.dto.CustcnntOutDto;
 import com.netneg.admin.dto.MasterListOutDto;
 import com.netneg.admin.service.BPListService;
@@ -188,7 +189,22 @@ public class BPController {
 	public ResultJson dataUpdate(@RequestBody BPListInDto data) {
 		
 		try {
-			bpDto.ItemUpdate(data);
+			bpDto.AllItemUpdate(data);
+			ResultJson ret=ResultJson.success(null,null);
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
+	
+	@PostMapping("contactUpdate")
+	public ResultJson contactUpdate(@RequestBody CustcnntInDto data) {
+		
+		try {
+			bpListService.CntAllItemUpdate(data);
 			ResultJson ret=ResultJson.success(null,null);
 			return ret;
 		} catch (Exception e) {
@@ -214,5 +230,20 @@ public class BPController {
 		}
 	}
 	
+	
+	@PostMapping("createContact")
+	public ResultJson createContact(@RequestBody CustcnntInDto data) {
+		
+		try {
+			bpListService.createContact(data);
+			ResultJson ret=ResultJson.success(null,null);
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
 	
 }

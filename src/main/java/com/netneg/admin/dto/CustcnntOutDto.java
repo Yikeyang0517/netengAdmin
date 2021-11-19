@@ -8,12 +8,16 @@ public class CustcnntOutDto {
 	private String cnntlistId;
 	private String prjprepsnId;
 	private String Id;
+	private String prjId;
 	private String prjName;
+	private String custpsnId;
 	private String custpsnName;
 	private String bpName;
 	private String sales;
+	private String salesName;
 	private String contactdate;
 	private String cnttType;
+	private String psnId;
 	private String psnName;
 	private BigDecimal price;
 	private String result;
@@ -158,6 +162,30 @@ public class CustcnntOutDto {
 	}
 	public void setUpdatetime(String updatetime) {
 		this.updatetime = updatetime;
+	}
+	public String getPrjId() {
+		return prjId;
+	}
+	public void setPrjId(String prjId) {
+		this.prjId = prjId;
+	}
+	public String getCustpsnId() {
+		return custpsnId;
+	}
+	public void setCustpsnId(String custpsnId) {
+		this.custpsnId = custpsnId;
+	}
+	public String getSalesName() {
+		return salesName;
+	}
+	public void setSalesName(String salesName) {
+		this.salesName = salesName;
+	}
+	public String getPsnId() {
+		return psnId;
+	}
+	public void setPsnId(String psnId) {
+		this.psnId = psnId;
 	}
 	
 	

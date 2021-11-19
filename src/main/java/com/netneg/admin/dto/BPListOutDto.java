@@ -12,6 +12,7 @@ public class BPListOutDto {
 	private String country;
 	private Long bpimpt;
 	private String sales;
+	private String salesName;
 	private String hpurl;
 	private String zipcode;
 	private String address;
@@ -214,6 +215,12 @@ public class BPListOutDto {
 	}
 	public void setCnttwnglvl(String cnttwnglvl) {
 		this.cnttwnglvl = cnttwnglvl;
+	}
+	public String getSalesName() {
+		return salesName;
+	}
+	public void setSalesName(String salesName) {
+		this.salesName = salesName;
 	}
 	
 
