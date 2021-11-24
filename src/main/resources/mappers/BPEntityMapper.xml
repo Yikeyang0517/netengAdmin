@@ -8,6 +8,7 @@
     <result column="bp_short" property="bpShort" jdbcType="VARCHAR" />
     <result column="empcnt" property="empcnt" jdbcType="BIGINT" />
     <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="bpimptName" property="bpimptName" jdbcType="VARCHAR" />
     <result column="bpimpt" property="bpimpt" jdbcType="BIGINT" />
     <result column="sales" property="sales" jdbcType="VARCHAR" />
     <result column="salesName" property="salesName" jdbcType="VARCHAR" />
@@ -25,10 +26,18 @@
     <result column="contactcnt" property="contactcnt" jdbcType="BIGINT" />
     <result column="maxcnttdays" property="maxcnttdays" jdbcType="BIGINT" />
     <result column="prjprsncnt" property="prjprsncnt" jdbcType="BIGINT" />
+    <result column="custpsn_cnt" property="custpsnCnt" jdbcType="BIGINT" />
+    <result column="psn_cnt" property="psnCnt" jdbcType="BIGINT" />
+    <result column="kmcnt" property="kmcnt" jdbcType="BIGINT" />
+    <result column="v_prjcnt" property="vPrjcnt" jdbcType="BIGINT" />
+    <result column="v_fzcnt" property="vFzcnt" jdbcType="BIGINT" />
+    <result column="v_tgcnt" property="vTgcnt" jdbcType="BIGINT" />
+    <result column="tacnt" property="tacnt" jdbcType="BIGINT" />
     <result column="gotprjcnt" property="gotprjcnt" jdbcType="BIGINT" />
     <result column="bpprsncnt" property="bpprsncnt" jdbcType="BIGINT" />
     <result column="prjflg" property="prjflg" jdbcType="VARCHAR" />
     <result column="wngtext" property="wngtext" jdbcType="VARCHAR" />
+    <result column="wnglvlName" property="wnglvlName" jdbcType="VARCHAR" />
     <result column="wnglvl" property="wnglvl" jdbcType="VARCHAR" />
     <result column="cnttwnglvl" property="cnttwnglvl" jdbcType="VARCHAR" /> 
   </resultMap>
@@ -41,20 +50,68 @@
     <result column="prj_name" property="prjName" jdbcType="VARCHAR" />
     <result column="custpsn_id" property="custpsnId" jdbcType="VARCHAR" />
     <result column="custpsn_name" property="custpsnName" jdbcType="VARCHAR" />
-    <result column="bp_name" property="bpName" jdbcType="VARCHAR" />
     <result column="sales" property="sales" jdbcType="VARCHAR" />
     <result column="salesName" property="salesName" jdbcType="VARCHAR" />
     <result column="contactdate" property="contactdate" jdbcType="TIMESTAMP" />
     <result column="cntt_type" property="cnttType" jdbcType="VARCHAR" />
+    <result column="cnttTypeName" property="cnttTypeName" jdbcType="VARCHAR" />
     <result column="psn_id" property="psnId" jdbcType="VARCHAR" />
     <result column="psn_name" property="psnName" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
     <result column="result" property="result" jdbcType="VARCHAR" />
-    <result column="resumelvl" property="resumelvl" jdbcType="VARCHAR" />
+    <result column="resultName" property="resultName" jdbcType="VARCHAR" />
+    <result column="resumelvl" property="resumelvl" jdbcType="BIGINT" />
+    <result column="resumelvlName" property="resumelvlName" jdbcType="VARCHAR" />
     <result column="workhours" property="workhours" jdbcType="DOUBLE" />
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="cnntime" property="cnntime" jdbcType="VARCHAR" />
     <result column="psncnttmemo" property="psncnttmemo" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createuser" property="createuser" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="CustomResultMap" type="com.netneg.admin.dto.CustomOutDto" >
+    <id column="custpsn_id" property="custpsnId" jdbcType="VARCHAR" />
+    <result column="custpsn_name" property="custpsnName" jdbcType="VARCHAR" />
+    <result column="bp_name" property="bpName" jdbcType="VARCHAR" />
+    <result column="bpSales" property="bpSales" jdbcType="VARCHAR" />
+    <result column="bpSalesName" property="bpSalesName" jdbcType="VARCHAR" />
+    <result column="sales" property="sales" jdbcType="VARCHAR" />
+    <result column="salesName" property="salesName" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="countryName" property="countryName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="sexName" property="sexName" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="old" property="old" jdbcType="BIGINT" />
+    <result column="psn_station" property="psnStation" jdbcType="VARCHAR" />
+    <result column="psn_tel1" property="psnTel1" jdbcType="VARCHAR" />
+    <result column="psn_tel2" property="psnTel2" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="psn_wxid" property="psnWxid" jdbcType="VARCHAR" />
+    <result column="cardfile" property="cardfile" jdbcType="VARCHAR" />
+    <result column="custpsn_memo" property="custpsnMemo" jdbcType="VARCHAR" />
+    <result column="contactdate" property="contactdate" jdbcType="TIMESTAMP" />
+    <result column="contactcnt" property="contactcnt" jdbcType="BIGINT" />
+    <result column="maxcnttdays" property="maxcnttdays" jdbcType="BIGINT" />
+    <result column="custpsn_cnt" property="custpsnCnt" jdbcType="BIGINT" />
+    <result column="psn_cnt" property="psnCnt" jdbcType="BIGINT" />
+    <result column="kmcnt" property="kmcnt" jdbcType="BIGINT" />
+    <result column="v_prjcnt" property="vPrjcnt" jdbcType="BIGINT" />
+    <result column="v_fzcnt" property="vFzcnt" jdbcType="BIGINT" />
+    <result column="v_tgcnt" property="vTgcnt" jdbcType="BIGINT" />
+    <result column="tacnt" property="tacnt" jdbcType="BIGINT" />
+    <result column="prjflg" property="prjflg" jdbcType="VARCHAR" />
+    <result column="wngtext" property="wngtext" jdbcType="VARCHAR" />
+    <result column="wnglvl" property="wnglvl" jdbcType="VARCHAR" />
+    <result column="wnglvlName" property="wnglvlName" jdbcType="VARCHAR" />
+    <result column="cnttwnglvl" property="cnttwnglvl" jdbcType="VARCHAR" /> 
+    <result column="position" property="position" jdbcType="VARCHAR" /> 
+    <result column="audtnum" property="audtnum" jdbcType="BIGINT" />
+    <result column="bpcustm" property="bpcustm" jdbcType="BIGINT" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="createuser" property="createuser" jdbcType="VARCHAR" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
@@ -66,23 +123,55 @@
   	<result column="name" property="value" jdbcType="VARCHAR" />
   </resultMap>
   
-  <sql id="Base_Column_List" >
-    bpid,bp_code, bp_name, bp_short, empcnt, country, bpimpt, sales, hpurl, zipcode, address, tel, fax, createtime, createuser, updateuser, updatetime, bp_memo, contactdate, contactcnt, maxcnttdays, prjprsncnt, gotprjcnt, bpprsncnt, prjflg, wngtext, wnglvl, cnttwnglvl
-  </sql>
-  
   <select id="getInitList" resultMap="BaseResultMap">
   	select 
-  	a.bpid,a.bp_code, a.bp_name, a.bp_short, a.empcnt, a.country, a.bpimpt, a.sales, b.DISPLAY_NAME as salesName, a.hpurl, a.zipcode, a.address, a.tel, a.fax, a.createtime, a.createuser, a.updateuser, a.updatetime, a.bp_memo, a.contactdate, a.contactcnt, a.maxcnttdays, a.prjprsncnt, a.gotprjcnt, a.bpprsncnt, a.prjflg, a.wngtext, a.wnglvl, a.cnttwnglvl
+  	a.bpid,a.bp_code, a.bp_name, a.bp_short, a.empcnt, a.country, a.bpimpt, a.sales,
+  	b.DISPLAY_NAME as salesName, a.hpurl, a.zipcode, a.address, a.tel, a.fax, a.createtime,
+  	a.createuser, a.updateuser, a.updatetime, a.bp_memo, a.contactdate, a.contactcnt,
+  	e.custpsn_cnt,e.psn_cnt,e.kmcnt,e.v_prjcnt,e.v_fzcnt,e.v_tgcnt,e.tacnt,
+  	 a.maxcnttdays, a.prjprsncnt, a.gotprjcnt, a.bpprsncnt, a.prjflg, a.wngtext, a.wnglvl, a.cnttwnglvl,
+  	(select V from WB_KEY c where c.KEY_NAME = 'bpimpt' and c.K = a.bpimpt) as bpimptName,
+  	(select V from WB_KEY d where d.KEY_NAME = 'wnglvl' and d.K = a.wnglvl) as wnglvlName
   	from neg_bp a 
   	left join WB_USER b
   	on a.sales = b.USER_NAME
+  	left join negvw_bp e
+  	on a.bpid = e.bpid
+  	where a.delflg=0
+  	ORDER BY  a.updatetime,a.createtime DESC
+  </select>
+  
+  <select id="getCustomList" resultMap="CustomResultMap">
+  	select 
+  	a.custpsn_id,a.custpsn_name,concat(c.bp_short,' | ',c.bp_name) as bp_name,c.sales as bpSales,e.DISPLAY_NAME as bpSalesName,b.DISPLAY_NAME as salesName,a.birthday,
+  	a.old,a.psn_station,a.psn_tel1,a.psn_tel2,a.email,a.psn_wxid,a.cardfile,a.custpsn_memo,a.contactdate,a.contactcnt,a.maxcnttdays,a.prjflg,a.wngtext,
+  	h.custpsn_cnt,h.psn_cnt,h.kmcnt,h.v_prjcnt,h.v_fzcnt,h.v_tgcnt,h.tacnt,
+  	a.wnglvl,(select V from WB_KEY j where j.KEY_NAME = 'wnglvl' and j.K = a.wnglvl) as wnglvlName,
+  	a.cnttwnglvl,a.bpid,a.position,a.sales,a.createtime,a.createuser,a.updateuser,a.updatetime,
+  	a.country,(select V from WB_KEY h where h.KEY_NAME = 'country' and h.K = a.country) as countryName,
+  	a.sex,(select V from WB_KEY i where i.KEY_NAME = 'sex' and i.K = a.sex) as sexName
+  	from neg_custpsn a 
+  	left join WB_USER b
+  	on a.sales = b.USER_NAME
+  	left join negvw_bp h
+  	on a.bpid = h.bpid
+  	left join neg_bp c
+  	on a.bpid = c.bpid
+  	left join WB_USER e 
+  	on c.sales = e.USER_NAME
   	where a.delflg=0
   	ORDER BY  a.updatetime,a.createtime DESC
   </select>
   
   <select id="getcntList" resultMap="ContactResultMap">
   	select 
-  	a.custcntt_id,a.cnntlist_id,a.prjprepsn_id,a.prj_id,c.prj_name,d.custpsn_id,d.custpsn_name,e.bp_name,a.sales,b.DISPLAY_NAME as salesName,a.contactdate,a.cntt_type,a.psn_id,f.psn_name,a.price,a.result,a.resumelvl,a.workhours,a.address,a.cnntime,a.psncnttmemo,a.createtime,a.createuser,a.updatetime,a.updateuser 
+  	a.custcntt_id,a.cnntlist_id,a.prjprepsn_id,a.prj_id,c.prj_name,d.custpsn_id,
+  	concat(e.bp_short,' | ',d.custpsn_name) as custpsn_name,a.sales,
+  	b.DISPLAY_NAME as salesName,a.contactdate,a.psn_id,f.psn_name,a.price,
+  	a.cntt_type,(select V from WB_KEY f where f.KEY_NAME = 'cntt_type' and f.K = a.cntt_type) as cnttTypeName,
+  	a.result,(select V from WB_KEY g where g.KEY_NAME = 'OKNG' and g.K = a.result) as resultName,
+  	a.resumelvl,(select V from WB_KEY h where h.KEY_NAME = 'resumelvl' and h.K = a.resumelvl) as resumelvlName,
+  	a.workhours,a.address,a.cnntime,a.psncnttmemo,a.createtime,a.createuser,a.updatetime,a.updateuser 
   	from neg_custcntt a 
   	left join WB_USER b
   	on a.sales = b.USER_NAME
@@ -100,7 +189,13 @@
    
   <select id="contactSearch" resultMap="ContactResultMap">
   	select 
-  	a.custcntt_id,a.cnntlist_id,a.prjprepsn_id,a.prj_id,c.prj_name,d.custpsn_id,d.custpsn_name,e.bp_name,a.sales,b.DISPLAY_NAME as salesName,a.contactdate,a.cntt_type,a.psn_id,f.psn_name,a.price,a.result,a.resumelvl,a.workhours,a.address,a.cnntime,a.psncnttmemo,a.createtime,a.createuser,a.updatetime,a.updateuser 
+  	a.custcntt_id,a.cnntlist_id,a.prjprepsn_id,a.prj_id,c.prj_name,d.custpsn_id,
+  	concat(e.bp_short,' | ',d.custpsn_name) as custpsn_name,a.sales,
+  	b.DISPLAY_NAME as salesName,a.contactdate,a.psn_id,f.psn_name,a.price,
+  	a.cntt_type,(select V from WB_KEY f where f.KEY_NAME = 'cntt_type' and f.K = a.cntt_type) as cnttTypeName,
+  	a.result,(select V from WB_KEY g where g.KEY_NAME = 'OKNG' and g.K = a.result) as resultName,
+  	a.resumelvl,(select V from WB_KEY h where h.KEY_NAME = 'resumelvl' and h.K = a.resumelvl) as resumelvlName,
+  	a.workhours,a.address,a.cnntime,a.psncnttmemo,a.createtime,a.createuser,a.updatetime,a.updateuser 
   	from neg_custcntt a 
   	left join WB_USER b
   	on a.sales = b.USER_NAME
@@ -143,10 +238,18 @@
   
   <select id="getSearchList" resultMap="BaseResultMap">
   	select 
-  	a.bpid,a.bp_code, a.bp_name, a.bp_short, a.empcnt, a.country, a.bpimpt, a.sales, b.DISPLAY_NAME as salesName, a.hpurl, a.zipcode, a.address, a.tel, a.fax, a.createtime, a.createuser, a.updateuser, a.updatetime, a.bp_memo, a.contactdate, a.contactcnt, a.maxcnttdays, a.prjprsncnt, a.gotprjcnt, a.bpprsncnt, a.prjflg, a.wngtext, a.wnglvl, a.cnttwnglvl
-  	from neg_bp a 
+  	a.bpid,a.bp_code, a.bp_name, a.bp_short, a.empcnt, a.country, a.bpimpt, a.sales,
+  	b.DISPLAY_NAME as salesName, a.hpurl, a.zipcode, a.address, a.tel, a.fax, a.createtime,
+  	a.createuser, a.updateuser, a.updatetime, a.bp_memo, a.contactdate, a.contactcnt,
+  	e.custpsn_cnt,e.psn_cnt,e.kmcnt,e.v_prjcnt,e.v_fzcnt,e.v_tgcnt,e.tacnt,
+  	 a.maxcnttdays, a.prjprsncnt, a.gotprjcnt, a.bpprsncnt, a.prjflg, a.wngtext, a.wnglvl, a.cnttwnglvl,
+  	(select V from WB_KEY c where c.KEY_NAME = 'bpimpt' and c.K = a.bpimpt) as bpimptName,
+  	(select V from WB_KEY d where d.KEY_NAME = 'wnglvl' and d.K = a.wnglvl) as wnglvlName 
+  	neg_bp a 
   	left join WB_USER b
   	on a.sales = b.USER_NAME
+  	left join negvw_bp e
+  	on a.bpid = e.bpid
   	where a.delflg=0
   	<if test="company != null and company !=''">
 			and a.bpid = #{company}
@@ -157,6 +260,44 @@
   	ORDER BY  a.updatetime,a.createtime DESC
   </select>
   
+  <select id="customSearch" resultMap="CustomResultMap">
+  	select 
+  	a.custpsn_id,a.custpsn_name,concat(c.bp_short,' | ',c.bp_name) as bp_name,c.sales as bpSales,e.DISPLAY_NAME as bpSalesName,b.DISPLAY_NAME as salesName,a.birthday,
+  	a.old,a.psn_station,a.psn_tel1,a.psn_tel2,a.email,a.psn_wxid,a.cardfile,a.custpsn_memo,a.contactdate,a.contactcnt,a.maxcnttdays,a.prjflg,a.wngtext,
+  	h.custpsn_cnt,h.psn_cnt,h.kmcnt,h.v_prjcnt,h.v_fzcnt,h.v_tgcnt,h.tacnt,
+  	a.wnglvl,(select V from WB_KEY j where j.KEY_NAME = 'wnglvl' and j.K = a.wnglvl) as wnglvlName,
+  	a.cnttwnglvl,a.bpid,a.position,a.sales,a.createtime,a.createuser,a.updateuser,a.updatetime,
+  	a.country,(select V from WB_KEY h where h.KEY_NAME = 'country' and h.K = a.country) as countryName,
+  	a.sex,(select V from WB_KEY i where i.KEY_NAME = 'sex' and i.K = a.sex) as sexName
+  	from neg_custpsn a 
+  	left join WB_USER b
+  	on a.sales = b.USER_NAME
+  	left join negvw_bp h
+  	on a.bpid = h.bpid
+  	left join neg_bp c
+  	on a.bpid = c.bpid
+  	left join WB_USER e 
+  	on c.sales = e.USER_NAME
+  	where a.delflg=0
+  	<if test="company != null and company !=''">
+			and a.bpid = #{company}
+	</if>
+	<if test="sales != null and sales !=''">
+			and a.sales = #{sales}
+	</if>
+	<if test="custpsnName != null and custpsnName !=''">
+			and a.custpsn_name LIKE '%${custpsnName}%'
+	</if>
+  	ORDER BY  a.updatetime,a.createtime DESC
+  </select>
+  
+  <select id="getCompanyMaster" resultMap="MasterResultMap">
+  	select bpid as id,concat(bp_short,' | ',bp_name) as name from neg_bp
+  </select>
+  
+  <select id="getMaster" resultMap="MasterResultMap">
+  	select V as name,K as id from WB_KEY where KEY_NAME = #{keyName}
+  </select>
   
   <select id="getSalesMaster" resultMap="MasterResultMap">
   	select USER_NAME as id, DISPLAY_NAME as name from WB_USER
@@ -167,7 +308,7 @@
   </select>
   
   <select id="getCustpsnMaster" resultMap="MasterResultMap">
-  	select custpsn_id as id, custpsn_name as name from neg_custpsn
+  	select a.custpsn_id as id, concat(b.bp_short,' | ',a.custpsn_name) as name from neg_custpsn a left join neg_bp b on a.bpid = b.bpid
   </select>
   
   <select id="getPersonMaster" resultMap="MasterResultMap">
@@ -182,6 +323,9 @@
   	select count(*) from neg_custcntt where custcntt_id = #{autoId}
   </select>
   
+  <select id="cutmIdExists" resultType="Integer">
+  	select count(*) from neg_custpsn where custpsn_id = #{autoId}
+  </select>
   
   <select id="getCustpsnIdById" resultType="String">
   	select custpsn_id from neg_custcntt where custcntt_id = #{custcnttId}
@@ -229,6 +373,27 @@
   updatetime = #{updatetime}
   where custcntt_id = #{custcnttId}
   </update>
+  <update id="customUpdate" parameterType = "com.netneg.admin.dto.CustomInDto">
+  update neg_custpsn set
+  custpsn_name = #{custpsnName},
+  country = #{country},
+  sex = #{sex},
+  birthday = #{birthday},
+  old = #{old},
+  psn_station = #{psnStation},
+  psn_tel1 = #{psnTel1},
+  email = #{email},
+  cardfile = #{cardfile},
+  custpsn_memo = #{custpsnMemo},
+  maxcnttdays = #{maxcnttdays},
+  prjflg = #{prjflg},
+  wngtext = #{wngtext},
+  wnglvl = #{wnglvl},
+  position = #{position},
+  updateuser = #{updateuser},
+  updatetime = #{updatetime}
+  where custpsn_id = #{custpsnId}
+  </update>
   <update id="deleteById" parameterType = "String">
   update neg_bp set
   delflg = '1'
@@ -239,7 +404,11 @@
   delflg = '1'
   where custcntt_id = #{id}
   </update>
-  
+  <update id="deleteCustomById" parameterType = "String">
+  update neg_custpsn set
+  delflg = '1'
+  where custpsn_id = #{id}
+  </update>
   <update id="updateCPById" parameterType = "String">
   update neg_custpsn set
   contactdate = (SELECT MAX(DATE(contactdate))FROM neg_custcntt where custpsn_id = #{custpsnId}),
@@ -261,5 +430,10 @@
   <insert id="createContact" parameterType = "com.netneg.admin.dto.CustcnntInDto" >
   insert into neg_custcntt(custcntt_id,prj_id,delflg,custpsn_id,psn_id,sales,psncnttmemo,cntt_type,price,contactdate,workhours,address,cnntime,result,resumelvl,createtime,createuser) 
   values(#{custcnttId},#{prjId},0,#{custpsnId},#{psnId},#{sales},#{psncnttmemo},#{cnttType},#{price},#{contactdate},#{workhours},#{address},#{cnntime},#{result},#{resumelvl},#{createtime},#{createuser})
+  </insert>
+  
+  <insert id="createCustom" parameterType = "com.netneg.admin.dto.CustomInDto" >
+  insert into neg_custpsn(custpsn_id,custpsn_name,delflg,country,sex,sales,birthday,old,psn_station,psn_tel1,email,cardfile,custpsn_memo,contactdate,contactcnt,maxcnttdays,prjflg,wngtext,wnglvl,bpid,position,createtime,createuser) 
+  values(#{custpsnId},#{custpsnName},0,#{country},#{sex},#{sales},#{birthday},#{old},#{psnStation},#{psnTel1},#{email},#{cardfile},#{custpsnMemo},#{contactdate},'1',#{maxcnttdays},#{prjflg},#{wngtext},#{wnglvl},#{bpid},#{position},#{createtime},#{createuser})
   </insert>
 </mapper>

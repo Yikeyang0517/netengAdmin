@@ -6,6 +6,8 @@ import com.netneg.admin.dto.BPListInDto;
 import com.netneg.admin.dto.BPListOutDto;
 import com.netneg.admin.dto.CustcnntInDto;
 import com.netneg.admin.dto.CustcnntOutDto;
+import com.netneg.admin.dto.CustomInDto;
+import com.netneg.admin.dto.CustomOutDto;
 import com.netneg.admin.dto.MasterListOutDto;
 import com.netneg.admin.vo.SearchBean;
 
@@ -47,4 +49,20 @@ public interface BPEntityMapper {
 	void updateBPById(String custpsnId);
 
 	void createContact(CustcnntInDto data);
+
+	List<CustomOutDto> getCustomList();
+
+	void deleteCustomById(String id);
+
+	List<MasterListOutDto> getMaster(String keyName);
+
+	void customUpdate(CustomInDto data);
+
+	List<CustomOutDto> customSearch(SearchBean data);
+
+	List<MasterListOutDto> getCompanyMaster();
+
+	Integer cutmIdExists(String autoId);
+
+	void createCustom(CustomInDto data);
 }

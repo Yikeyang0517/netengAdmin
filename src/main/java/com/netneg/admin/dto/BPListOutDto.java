@@ -10,6 +10,7 @@ public class BPListOutDto {
 	private String bpShort;
 	private Long empcnt;
 	private String country;
+	private String bpimptName;
 	private Long bpimpt;
 	private String sales;
 	private String salesName;
@@ -26,12 +27,20 @@ public class BPListOutDto {
 	private Timestamp contactdate;
 	private Long contactcnt;
 	private Long maxcnttdays;
+	private Long custpsnCnt;
+	private Long psnCnt;
+	private Long kmcnt;
+	private Long vPrjcnt;
+	private Long vFzcnt;
+	private Long vTgcnt;
+	private Long tacnt;
 	private Long prjprsncnt;
 	private Long gotprjcnt;
 	private Long bpprsncnt;
 	private String prjflg;
 	private String contactflg;
 	private String wngtext;
+	private String wnglvlName;
 	private String wnglvl;
 	private String cnttwnglvl;
 	
@@ -221,6 +230,60 @@ public class BPListOutDto {
 	}
 	public void setSalesName(String salesName) {
 		this.salesName = salesName;
+	}
+	public String getBpimptName() {
+		return bpimptName;
+	}
+	public void setBpimptName(String bpimptName) {
+		this.bpimptName = bpimptName;
+	}
+	public String getWnglvlName() {
+		return wnglvlName;
+	}
+	public void setWnglvlName(String wnglvlName) {
+		this.wnglvlName = wnglvlName;
+	}
+	public Long getCustpsnCnt() {
+		return custpsnCnt;
+	}
+	public void setCustpsnCnt(Long custpsnCnt) {
+		this.custpsnCnt = custpsnCnt;
+	}
+	public Long getPsnCnt() {
+		return psnCnt;
+	}
+	public void setPsnCnt(Long psnCnt) {
+		this.psnCnt = psnCnt;
+	}
+	public Long getKmcnt() {
+		return kmcnt;
+	}
+	public void setKmcnt(Long kmcnt) {
+		this.kmcnt = kmcnt;
+	}
+	public Long getvPrjcnt() {
+		return vPrjcnt;
+	}
+	public void setvPrjcnt(Long vPrjcnt) {
+		this.vPrjcnt = vPrjcnt;
+	}
+	public Long getvFzcnt() {
+		return vFzcnt;
+	}
+	public void setvFzcnt(Long vFzcnt) {
+		this.vFzcnt = vFzcnt;
+	}
+	public Long getvTgcnt() {
+		return vTgcnt;
+	}
+	public void setvTgcnt(Long vTgcnt) {
+		this.vTgcnt = vTgcnt;
+	}
+	public Long gettTacnt() {
+		return tacnt;
+	}
+	public void settTacnt(Long tTacnt) {
+		this.tacnt = tTacnt;
 	}
 	
 

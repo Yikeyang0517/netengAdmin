@@ -12,6 +12,8 @@ import com.netneg.admin.dto.BPListInDto;
 import com.netneg.admin.dto.BPListOutDto;
 import com.netneg.admin.dto.CustcnntInDto;
 import com.netneg.admin.dto.CustcnntOutDto;
+import com.netneg.admin.dto.CustomInDto;
+import com.netneg.admin.dto.CustomOutDto;
 import com.netneg.admin.service.BPListService;
 import com.netneg.admin.vo.SearchBean;
 
@@ -26,7 +28,7 @@ public class BPListServiceImpl implements BPListService{
 		//获取所有BP
 		List<BPListOutDto> list = bpDto.getInitList(userId);
 		//为list附上ID
-		setId(list);
+		setBPId(list);
 		return list;
 	}
 	@Override
@@ -34,10 +36,10 @@ public class BPListServiceImpl implements BPListService{
 		//获取所有检索后的BPList
 				List<BPListOutDto> list = bpDto.getSearchList(company,sales);
 				//为list附上ID
-				setId(list);
+				setBPId(list);
 		return list;
 	}
-	public List<BPListOutDto> setId(List<BPListOutDto> list){
+	public List<BPListOutDto> setBPId(List<BPListOutDto> list){
 				//遍历数组并赋值
 				for (int i=0;i<list.size();i++) {
 					//给每条数据的ID赋值
@@ -45,15 +47,41 @@ public class BPListServiceImpl implements BPListService{
 					//计算上次联系距今时间，返回contactflg值
 					Date date = new Date();
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					Date oldDate = list.get(i).getContactdate();
-					if(oldDate != null ) {
-					long diffday = (date.getTime() - oldDate.getTime()) / 60 / 60 / 24 / 1000;
-					if(list.get(i).getMaxcnttdays() != null && diffday > list.get(i).getMaxcnttdays()) {
-						list.get(i).setContactflg("1");
-					}else {
-						list.get(i).setContactflg("1");
+					if(list.get(i).getMaxcnttdays() != null ) {
+						if(list.get(i).getContactdate() != null) {
+							Date oldDate = list.get(i).getContactdate();
+							long diffday = (date.getTime() - oldDate.getTime()) / 60 / 60 / 24 / 1000;
+							if( diffday > list.get(i).getMaxcnttdays()) {
+								list.get(i).setContactflg("1");
+							}
+						}else {
+							list.get(i).setContactflg("1");
+						}
 					}
-					} 
+				}
+				return list;
+	}
+
+	public List<CustomOutDto> setCustomId(List<CustomOutDto> list){
+				//遍历数组并赋值
+				for (int i=0;i<list.size();i++) {
+					//给每条数据的ID赋值
+					list.get(i).setId(String.valueOf(i+1));
+					//计算上次联系距今时间，返回contactflg值
+					Date date = new Date();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					
+					if(list.get(i).getMaxcnttdays() != null ) {
+						if(list.get(i).getContactdate() != null) {
+							Date oldDate = list.get(i).getContactdate();
+							long diffday = (date.getTime() - oldDate.getTime()) / 60 / 60 / 24 / 1000;
+							if( diffday > list.get(i).getMaxcnttdays()) {
+								list.get(i).setContactflg("1");
+							}
+						}else {
+							list.get(i).setContactflg("1");
+						}
+					}
 				}
 				return list;
 	}
@@ -90,6 +118,8 @@ public class BPListServiceImpl implements BPListService{
 	        	 cnt = bpDto.bpIdExists(autoId);
 	        }else if(codeFlg==2){
 	        	 cnt = bpDto.cntIdExists(autoId);
+	        }else if(codeFlg==3){
+	        	 cnt = bpDto.cutmIdExists(autoId);
 	        }
 	       
 	       if(cnt==0) {
@@ -119,7 +149,7 @@ public class BPListServiceImpl implements BPListService{
 		return list;
 	}
 	@Override
-	public void CntAllItemUpdate(CustcnntInDto data) {
+	public void cntAllItemUpdate(CustcnntInDto data) {
 		//获取更新前custpsnId
 		String oldCustpsnId = bpDto.getCustpsnIdById(data.getCustcnttId());
 		//更新沟通记录表
@@ -146,6 +176,48 @@ public class BPListServiceImpl implements BPListService{
 		//通过custpsnId更新bp表
 		bpDto.updateBPById(custpsnId);
 		
+	}
+	@Override
+	public List<CustomOutDto> getCustomList() {
+		//获取所有customList
+				List<CustomOutDto> list = bpDto.getCustomList();
+				setCustomId(list);
+				return list;
+	}
+	@Override
+	public void customUpdate(CustomInDto data) {
+				
+				//更新客户人员
+				bpDto.customUpdate(data);
+				
+	}
+	@Override
+	public List<CustomOutDto> customSearch(SearchBean data) {
+		List<CustomOutDto> list = bpDto.customSearch(data);
+		//为list附上ID
+		setCustomId(list);
+		return list;
+	}
+	@Override
+	public void createCustom(CustomInDto data) {
+				//生成唯一custpsnId
+				data.setCustpsnId(getCode(3));
+				//插入一条Custom数据
+				bpDto.createCustom(data);
+				//通过custpsnId更新bp表
+				bpDto.updateBPById(data.getCustpsnId());
+				//插入一条contact数据
+				CustcnntInDto contactData = new CustcnntInDto();
+				contactData.setCustcnttId(getCode(2));
+				contactData.setCustpsnId(data.getCustpsnId());
+				contactData.setCnttType("00");
+				contactData.setSales(data.getSales());
+				contactData.setPsncnttmemo("客户人员登记");
+				contactData.setContactdate(data.getContactdate());
+				contactData.setWorkhours("15");
+				contactData.setCreatetime(data.getCreatetime());
+				contactData.setCreateuser(data.getCreateuser());
+				bpDto.createContact(contactData);
 	}
 	
 }

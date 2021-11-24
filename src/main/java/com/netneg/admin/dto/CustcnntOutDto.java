@@ -12,16 +12,18 @@ public class CustcnntOutDto {
 	private String prjName;
 	private String custpsnId;
 	private String custpsnName;
-	private String bpName;
 	private String sales;
 	private String salesName;
 	private String contactdate;
 	private String cnttType;
+	private String cnttTypeName;
 	private String psnId;
 	private String psnName;
 	private BigDecimal price;
 	private String result;
+	private String resultName;
 	private Long resumelvl;
+	private String resumelvlName;
 	private BigDecimal workhours;
 	private String address;
 	private String cnntime;
@@ -65,12 +67,6 @@ public class CustcnntOutDto {
 	}
 	public void setCustpsnName(String custpsnName) {
 		this.custpsnName = custpsnName;
-	}
-	public String getBpName() {
-		return bpName;
-	}
-	public void setBpName(String bpName) {
-		this.bpName = bpName;
 	}
 	public String getSales() {
 		return sales;
@@ -186,6 +182,24 @@ public class CustcnntOutDto {
 	}
 	public void setPsnId(String psnId) {
 		this.psnId = psnId;
+	}
+	public String getCnttTypeName() {
+		return cnttTypeName;
+	}
+	public void setCnttTypeName(String cnttTypeName) {
+		this.cnttTypeName = cnttTypeName;
+	}
+	public String getResultName() {
+		return resultName;
+	}
+	public void setResultName(String resultName) {
+		this.resultName = resultName;
+	}
+	public String getResumelvlName() {
+		return resumelvlName;
+	}
+	public void setResumelvlName(String resumelvlName) {
+		this.resumelvlName = resumelvlName;
 	}
 	
 	

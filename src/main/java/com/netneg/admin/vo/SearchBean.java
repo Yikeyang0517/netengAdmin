@@ -9,6 +9,8 @@ public class SearchBean {
 	private String sales;
 	private String stardate;
 	private String enddate;
+	private String custpsnName;
+	
 	public String getType() {
 		return type;
 	}
@@ -56,6 +58,12 @@ public class SearchBean {
 	}
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
+	}
+	public String getCustpsnName() {
+		return custpsnName;
+	}
+	public void setCustpsnName(String custpsnName) {
+		this.custpsnName = custpsnName;
 	}
 	
 	

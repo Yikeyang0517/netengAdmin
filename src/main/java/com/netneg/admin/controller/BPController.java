@@ -15,6 +15,8 @@ import com.netneg.admin.dto.BPListInDto;
 import com.netneg.admin.dto.BPListOutDto;
 import com.netneg.admin.dto.CustcnntInDto;
 import com.netneg.admin.dto.CustcnntOutDto;
+import com.netneg.admin.dto.CustomInDto;
+import com.netneg.admin.dto.CustomOutDto;
 import com.netneg.admin.dto.MasterListOutDto;
 import com.netneg.admin.service.BPListService;
 import com.netneg.admin.vo.ResultJson;
@@ -28,6 +30,20 @@ public class BPController {
 	BPListService bpListService;
 	@Autowired
 	BPEntityMapper bpDto;
+	
+	@GetMapping("getMaster")
+	public ResultJson getMaster(String keyName) {
+		try {
+			List<MasterListOutDto> mapList= bpDto.getMaster(keyName);
+			ResultJson ret=ResultJson.success(mapList,mapList.size());
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
 	
 	@GetMapping("getBPList")
 	public ResultJson getBPList(String userId) {
@@ -103,6 +119,20 @@ public class BPController {
 	public ResultJson getPersonList() {
 		try {
 			List<MasterListOutDto> mapList= bpDto.getPersonMaster();
+			ResultJson ret=ResultJson.success(mapList,mapList.size());
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
+	
+	@GetMapping("getCompanyList")
+	public ResultJson getCompanyList() {
+		try {
+			List<MasterListOutDto> mapList= bpDto.getCompanyMaster();
 			ResultJson ret=ResultJson.success(mapList,mapList.size());
 			return ret;
 		} catch (Exception e) {
@@ -204,7 +234,7 @@ public class BPController {
 	public ResultJson contactUpdate(@RequestBody CustcnntInDto data) {
 		
 		try {
-			bpListService.CntAllItemUpdate(data);
+			bpListService.cntAllItemUpdate(data);
 			ResultJson ret=ResultJson.success(null,null);
 			return ret;
 		} catch (Exception e) {
@@ -246,4 +276,85 @@ public class BPController {
 		}
 	}
 	
+
+	@GetMapping("getCustomList")
+	public ResultJson getCustomList() {
+		try {
+			List<CustomOutDto> list=bpListService.getCustomList();
+			ResultJson ret=ResultJson.success(list,list.size());
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
+	
+	
+	@PostMapping("customUpdate")
+	public ResultJson customUpdate(@RequestBody CustomInDto data) {
+		try {
+			bpListService.customUpdate(data);
+			ResultJson ret=ResultJson.success(null,null);
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
+	
+	
+	@GetMapping("deleteCustomById")
+	public ResultJson deleteCustmoById(String id) {
+		
+		try {
+			bpDto.deleteCustomById(id);
+			ResultJson ret=ResultJson.success(null,null);
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
+	
+
+	@GetMapping("CustomSearch")
+	public ResultJson CustomSearch(SearchBean data) {
+		
+		try {
+			List<CustomOutDto> list=bpListService.customSearch(data);
+			ResultJson ret;
+			if(list != null) {
+				ret=ResultJson.success(list,list.size());
+			}else {
+				ret=ResultJson.success(null,null);
+			}
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
+	
+	@PostMapping("createCustom")
+	public ResultJson createCustom(@RequestBody CustomInDto data) {
+		
+		try {
+			bpListService.createCustom(data);
+			ResultJson ret=ResultJson.success(null,null);
+			return ret;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ResultJson ret=ResultJson.fail(e);
+			return ret;
+		}
+	}
 }
